@@ -13,7 +13,7 @@ class fail:public exception{ //Class จัดการ cinfail()
 	public:
 	virtual const char* what() const throw() {
 		cin.clear();
-		cin.ignore(59,'\n');
+		cin.ignore(50,'\n');
 		return "You Need to input 2 integers "; 
 	}
 }f;
@@ -23,7 +23,7 @@ int main(){
 	double d;
 	int a;
 do{
-	a=0;
+	
 	try{
 
 		
@@ -37,7 +37,6 @@ do{
 		
 		check0(y);
 
-		a=0;
 
 		//Normal Code
 		d=(double) x/y;
@@ -47,11 +46,9 @@ do{
 		double * myarray;
 		for(i=0;i<100000000;i++){
 			cout<<"Allocating memory...."<<i<<endl;
-			myarray=new double(50000000000000000);
-			
+			myarray=new double[5000000000000];
 		}
 		a=0;
-
 }
 /*	catch(const char* error){
 		cerr<<error<<endl;
@@ -69,8 +66,10 @@ do{
 	}*/
 	catch(exception &e){
 		cout<<e.what()<<endl;
-		a=1;
+		if(typeid(e)==typeid(bad_alloc)) a=0;
+		else a=1;
 	}
+
 
 }while(a);
 	return 0;
@@ -79,5 +78,5 @@ do{
 
 void check0(int x){
 	div0 e;
-	if(x==0) throw(e);
+	if(x==0) throw e;
 }
